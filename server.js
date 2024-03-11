@@ -23,6 +23,7 @@ app.get('/authenticate', async (req, res) => {
     });
 
     res.json({ accessToken: response.data.access_token });
+    console.log(response.data.access_token)
   } catch (error) {
     console.error('Error authenticating with Spotify:', error.response.data);
     res.status(500).json({ error: 'Internal server error' });
