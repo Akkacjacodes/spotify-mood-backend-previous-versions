@@ -1,0 +1,9 @@
+# .choreo/endpoints.yaml
+version: 0.1
+endpoints:
+  - name: Greeting Service
+    port: 9090
+    type: REST
+    networkVisibility: Project
+    context: /greeting
+    schemaFilePath: greeting_openapi.yaml
