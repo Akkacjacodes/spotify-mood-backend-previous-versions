@@ -6,4 +6,4 @@ endpoints:
     type: REST
     networkVisibility: Public
     context: /greeting
-    schemaFilePath: greeting_openapi.yaml
+    # schemaFilePath: greeting_openapi.yaml
