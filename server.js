@@ -9,7 +9,10 @@ app.use(express.json());
 
 
 app.get('/greeting', (req, res) => {
-  res.send("Greetings Hello")
+  res.json({
+    success: true,
+    message: "Hello, World"
+  })
 })
 
 
