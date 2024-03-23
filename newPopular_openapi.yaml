@@ -1,0 +1,29 @@
+openapi: 3.0.3
+info:
+  title: Now Popular Service
+  description: Provides Now Popular playlists.
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/
+    description: Development server
+paths:
+  /nowPopular:
+    get:
+      summary: Returns Now Popular playlists
+      description: Returns a simple JSON Now Popular array of playlist.
+      responses:
+        '200':
+          description: A JSON object with a Now Popular array of playlis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  message:
+                    type: string
+                    example: ""
+        '500':
+          description: Internal Server Error

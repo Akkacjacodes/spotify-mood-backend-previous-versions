@@ -36,7 +36,7 @@ async function getSpotifyToken() {
 }
 
 
-app.get('/newpopular', async (req, res) => {
+app.get('/nowpopular', async (req, res) => {
   const token = await getSpotifyToken();
   const response = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
     method: 'GET',
