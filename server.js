@@ -22,6 +22,12 @@ if (!client_id || !client_secret) {
 }
 
 app.use(cors());
+const corsOptions = {
+  origin: 'https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev',
+  optionsSuccessStatus: 200 // For legacy browsers
+};
+
+app.use(cors(corsOptions));
 
 
 async function getSpotifyToken() {
