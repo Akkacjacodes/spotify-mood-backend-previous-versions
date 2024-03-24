@@ -10,9 +10,14 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
+let origins = ["https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev", "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev"]
+
+if (process.env.NODE_ENV === "dev") {
+  origins = ["http://localhost:5173"]
+}
+
 const corsOptions = {
-  origin:
-    "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
+  origin: origins,
   optionsSuccessStatus: 200, // For legacy browsers
 };
 
@@ -27,6 +32,8 @@ if (!client_id || !client_secret) {
   );
   process.exit(1);
 }
+
+
 async function getSpotifyToken() {
   const response = await fetch("https://accounts.spotify.com/api/token", {
     method: "POST",
@@ -53,7 +60,6 @@ app.get("/newpopular", async (req, res) => {
     }
   );
   const data = await response.json();
-  console.log(data);
   res.send(data);
 });
 
@@ -68,27 +74,3 @@ app.get("/greeting", (req, res) => {
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-// // Route for Spotify authentication
-// app.get("/authenticate", async (req, res) => {
-//   const credentials = Buffer.from(
-//     `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
-//   ).toString("base64");
-//   const spotifyUrl = "https://accounts.spotify.com/api/token";
-//   const data = "grant_type=client_credentials";
-
-//   try {
-//     const response = await axios.post(spotifyUrl, data, {
-//       headers: {
-//         Authorization: `Basic ${credentials}`,
-//         "Content-Type": "application/x-www-form-urlencoded",
-//       },
-//     });
-
-//     res.json({ accessToken: response.data.access_token });
-//     console.log(response.data.access_token);
-//   } catch (error) {
-//     console.error("Error authenticating with Spotify:", error.response.data);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });

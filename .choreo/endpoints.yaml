@@ -8,7 +8,7 @@ endpoints:
     context: /greeting
     schemaFilePath: greeting_openapi.yaml
 
-  - name: Now Popular Service
+  - name: New Popular Service
     port: 3000
     type: REST
     networkVisibility: Public
