@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -8,8 +11,8 @@ const port = process.env.PORT || 3000;
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-import dotenv from 'dotenv';
-dotenv.config();
+
+
 const client_id = process.env.SPOTIFY_CLIENT_ID; 
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
@@ -36,7 +39,7 @@ async function getSpotifyToken() {
 }
 
 
-app.get('/nowpopular', async (req, res) => {
+app.get('/newpopular', async (req, res) => {
   const token = await getSpotifyToken();
   const response = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
     method: 'GET',
