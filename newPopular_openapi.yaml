@@ -4,7 +4,7 @@ info:
   description: Provides Now Popular playlists.
   version: 1.0.0
 servers:
-  - url: http://localhost:3000/
+  - url: https://5d55bd72-55b9-4785-8f11-e06014ee8714-dev.e1-us-cdp-2.choreoapis.dev/rmmd/spotifymoodbackend/now-popular-service-e9d/v1.0
     description: Development server
 paths:
   /nowPopular:
