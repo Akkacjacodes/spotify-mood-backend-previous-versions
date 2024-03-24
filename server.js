@@ -1,85 +1,73 @@
-import express from 'express';
-import cors from 'cors';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
+import express from "express";
+import cors from "cors";
+import fetch from "node-fetch";
+import dotenv from "dotenv";
 
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-// Middleware to parse JSON bodies
 app.use(express.json());
 
-
-
-const client_id = process.env.SPOTIFY_CLIENT_ID; 
-const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
-
-if (!client_id || !client_secret) {
-  console.error('Spotify client ID or secret is undefined. Check your environment variables.');
-  process.exit(1); // Exit the process if the credentials are not set
-}
-
-app.use(cors());
 const corsOptions = {
-  origin: 'https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev',
-  optionsSuccessStatus: 200 // For legacy browsers
+  origin:
+    "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
+  optionsSuccessStatus: 200, // For legacy browsers
 };
 
 app.use(cors(corsOptions));
 
+const client_id = process.env.SPOTIFY_CLIENT_ID;
+const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
 
+if (!client_id || !client_secret) {
+  console.error(
+    "Spotify client ID or secret is undefined. Check your environment variables."
+  );
+  process.exit(1);
+}
 async function getSpotifyToken() {
-  const response = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
+  const response = await fetch("https://accounts.spotify.com/api/token", {
+    method: "POST",
     headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      Authorization: 'Basic ' + Buffer.from(client_id + ':' + client_secret).toString('base64'),
+      "Content-Type": "application/x-www-form-urlencoded",
+      Authorization:
+        "Basic " +
+        Buffer.from(client_id + ":" + client_secret).toString("base64"),
     },
-    body: 'grant_type=client_credentials',
+    body: "grant_type=client_credentials",
   });
 
   const data = await response.json();
   return data.access_token;
 }
 
-
-app.get('/newpopular', async (req, res) => {
+app.get("/newpopular", async (req, res) => {
   const token = await getSpotifyToken();
-  const response = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
-    method: 'GET',
-    headers: { Authorization: `Bearer ${token}` },
-  });
+  const response = await fetch(
+    "https://api.spotify.com/v1/browse/featured-playlists",
+    {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    }
+  );
   const data = await response.json();
   console.log(data);
-res.send(data);
+  res.send(data);
 });
 
-app.get('/greeting', (req, res) => {
+app.get("/greeting", (req, res) => {
   res.json({
     success: true,
-    message: "Hello, World"
-  })
-})
-
-
+    message: "Hello, World",
+  });
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-
-
-
-
-
-
-
-
-
-
-
 
 // // Route for Spotify authentication
 // app.get("/authenticate", async (req, res) => {
