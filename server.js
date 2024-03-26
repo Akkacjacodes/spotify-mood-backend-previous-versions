@@ -14,7 +14,8 @@ let origins = [
   "https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev",
   "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
   "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev",
-  "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev"
+  "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev",
+  "https://60c6ef1e-8ec9-40fd-856b-502073f4e6d1.e1-us-cdp-2.choreoapps.dev",
 ];
 
 console.log(`Environment: ${process.env.NODE_ENV}`);
