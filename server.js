@@ -61,22 +61,19 @@ async function getSpotifyToken() {
   }
 }
 
-app.get("/newpopular", async (req, res) => {
-  try{const token = await getSpotifyToken();
-  const response = await fetch(
-    "https://api.spotify.com/v1/browse/featured-playlists",
-    {
-      method: "GET",
+app.get("/api/newpopular", async (req, res) => {
+  try {
+    const token = await getSpotifyToken();
+    const spotifyResponse = await fetch('https://api.spotify.com/v1/browse/featured-playlists', {
+      method: 'GET',
       headers: { Authorization: `Bearer ${token}` },
-    }
-  );
-  const data = await response.json();
-  res.send(data);
-  
-} catch (error) {
-  console.error("Error fetching playlists:", error);
-  res.status(500).json({ message: "Internal server error" });
-}
+    });
+    const data = await spotifyResponse.json();
+    res.send(data);
+  } catch (error) {
+    console.error("Error proxying the playlists request:", error);
+    res.status(500).json({ message: "Failed to fetch playlists from Spotify" });
+  }
 });
 
 app.get("/greeting", (req, res) => {
