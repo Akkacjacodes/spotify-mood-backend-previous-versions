@@ -3,29 +3,33 @@ import cors from "cors";
 import fetch from "node-fetch";
 import dotenv from "dotenv";
 
+
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.use(cors());
+
 app.use(express.json());
 
-let origins = [
-  "https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev",
-  "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
-  "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev",
-];
 
-if (process.env.NODE_ENV === "dev") {
-  origins = ["http://localhost:5173"];
-}
+// let origins = [
+//   "https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev",
+//   "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
+//   "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev",
+// ];
 
-const corsOptions = {
-  origin: origins,
-  optionsSuccessStatus: 200, // For legacy browsers
-};
+// if (process.env.NODE_ENV === "dev") {
+//   origins = ["http://localhost:5173"];
+// }
 
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: origins,
+//   optionsSuccessStatus: 200, // For legacy browsers
+// };
+
+// app.use(cors(corsOptions));
 
 const client_id = process.env.SPOTIFY_CLIENT_ID;
 const client_secret = process.env.SPOTIFY_CLIENT_SECRET;
