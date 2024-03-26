@@ -10,10 +10,14 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 
-let origins = ["https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev", "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev"]
+let origins = [
+  "https://a3e2d23b-5002-4170-8367-7eff2bf885dd.e1-us-cdp-2.choreoapps.dev",
+  "https://c5c09e16-156c-4f13-92bb-b98a1ac69c9a.e1-us-cdp-2.choreoapps.dev",
+  "https://f0cbb6d2-37d8-4407-af6c-059fd5d9ff1f.e1-us-cdp-2.choreoapps.dev",
+];
 
 if (process.env.NODE_ENV === "dev") {
-  origins = ["http://localhost:5173"]
+  origins = ["http://localhost:5173"];
 }
 
 const corsOptions = {
@@ -32,7 +36,6 @@ if (!client_id || !client_secret) {
   );
   process.exit(1);
 }
-
 
 async function getSpotifyToken() {
   const response = await fetch("https://accounts.spotify.com/api/token", {
