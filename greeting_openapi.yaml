@@ -3,6 +3,7 @@ info:
   title: Greeting Service API
   description: This is a simple API for a Greeting Service.
   version: 1.0.0
+x-wso2-disable-security: true
 servers:
   - url: http://localhost:3000
     description: Development server

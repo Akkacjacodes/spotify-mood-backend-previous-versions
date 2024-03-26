@@ -3,6 +3,7 @@ info:
   title: Now Popular Service
   description: Provides Now Popular playlists.
   version: 1.0.0
+x-wso2-disable-security: true
 servers:
   - url: /choreo-apis/rmmd/spotify-previous-version-backend/new-popular-service-440/v1.0
     description: Development server
